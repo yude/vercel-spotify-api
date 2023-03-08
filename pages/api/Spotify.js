@@ -44,16 +44,21 @@ const Spotify = async (_, res) => {
   }
 
   const song = await response.json();
+
   const isPlaying = song.is_playing;
   const title = song.item.name;
   const artist = song.item.artists.map((_artist) => _artist.name).join(', ');
   const album = song.item.album.name;
+  const album_art = song.item.album.images[0].url;
+  const link = song.item.external_urls.spotify;
 
   return res.status(200).json({
     album,
     artist,
     isPlaying,
     title,
+    link,
+    album_art,
   });
 };
 
